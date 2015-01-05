@@ -1,41 +1,64 @@
 <?php namespace KRDS\Extensions\Database;
 
 use PDO;
+use Illuminate\Database\SqlServerConnection;
+
 
 class MySqlConnection extends \Illuminate\Database\Connection {
 
-	protected function fetch_assoc()
+	protected function resetMode()
 	{
-		return $this->fetch(PDO::FETCH_ASSOC);
+		//$this->setFetchMode($this->app['config']['database.fetch']);
+	}
+	
+	public function fetch_assoc($query, $bindings = array(), $useReadPdo = true)
+	{
+		$this->setFetchMode(PDO::FETCH_ASSOC);
+		
+		return $this->select($query, $bindings = array(), $useReadPdo = true);
 	}
 
-	protected function fetch_column($column_index = 0)
+	public function fetch_column($query, $bindings = array(), $useReadPdo = true, $column_index = 0)
 	{
-		return $this->fetch(PDO::FETCH_COLUMN, $column_index);
+		$this->setFetchMode(PDO::FETCH_ASSOC);
+	
+		//TODO
+		return $this->select($query, $bindings = array(), $useReadPdo = true);
 	}
 
-	protected function fetch_group()
+	public function fetch_group($query, $bindings = array(), $useReadPdo = true)
 	{
-		return $this->fetch(PDO::FETCH_COLUMN | PDO::FETCH_GROUP);
+		$this->setFetchMode(PDO::FETCH_COLUMN | PDO::FETCH_GROUP);
+	
+		return $this->select($query, $bindings = array(), $useReadPdo = true);
 	}
 	
-	protected function fetch_group_assoc()
+	public function fetch_group_assoc($query, $bindings = array(), $useReadPdo = true)
 	{
-		return $this->fetch(PDO::FETCH_ASSOC | PDO::FETCH_GROUP);
+		$this->setFetchMode(PDO::FETCH_ASSOC | PDO::FETCH_GROUP);
+		
+		return $this->select($query, $bindings = array(), $useReadPdo = true);
 	}
 	
-	protected function fetch_pair()
+	public function fetch_pair($query, $bindings = array(), $useReadPdo = true)
 	{
-		return $this->fetch(PDO::FETCH_KEY_PAIR);
+		$this->setFetchMode(PDO::FETCH_KEY_PAIR);
+		
+		return $this->select($query, $bindings = array(), $useReadPdo = true);
 	}
 	
-	protected function fetch_row()
+	public function fetch_row($query, $bindings = array(), $useReadPdo = true)
 	{
-		return $this->fetch(PDO::FETCH_NUM);
+		print_r($this->config);
+	
+		$this->setFetchMode(PDO::FETCH_NUM);
+		
+		return $this->select($query, $bindings = array(), $useReadPdo = true);
 	}
 	
-	protected function fetch_unique()
+	public function fetch_unique($query, $bindings = array(), $useReadPdo = true)
 	{
-		return $this->fetch(PDO::FETCH_ASSOC | PDO::FETCH_UNIQUE);
+		$this->setFetchMode(PDO::FETCH_ASSOC | PDO::FETCH_UNIQUE);
+		
 	}
 }
