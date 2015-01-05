@@ -1,0 +1,9 @@
+{
+	"name": "krds/laravel-ext",
+	"license": "MIT",
+	"autoload": {
+		"psr-0": { 
+			"KRDS": "src/"
+		}
+	}
+}
