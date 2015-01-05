@@ -1,8 +1,6 @@
 <?php namespace KRDS\Extensions\Database;
 
 use PDO;
-use Illuminate\Database\SqlServerConnection;
-
 
 class MySqlConnection extends \Illuminate\Database\Connection {
 
@@ -19,16 +17,16 @@ class MySqlConnection extends \Illuminate\Database\Connection {
 
 			$statement->execute($me->prepareBindings($bindings));
 
-			if($me->getFetchMode() === PDO::FETCH_COLUMN)
-				return $statement->fetchAll($me->getFetchMode(), $fetchArgument);
+			if($fetchArgument !== null)
+				$data	=	$statement->fetchAll($me->getFetchMode(), $fetchArgument);
 			else
-				return $statement->fetchAll($me->getFetchMode());
+				$data	=	$statement->fetchAll($me->getFetchMode());
+				
+			// Reset the Connection fetch mode to the default one
+			$this->setFetchMode($this->config['fetch']);
+			
+			return $data;
 		});
-	}
-	
-	protected function resetFetchMode()
-	{		
-		$this->setFetchMode($this->config['fetch']);
 	}
 	
 	public function fetchAssoc($query, $bindings = array(), $useReadPdo = true)
@@ -61,8 +59,6 @@ class MySqlConnection extends \Illuminate\Database\Connection {
 	
 	public function fetchRow($query, $bindings = array(), $useReadPdo = true)
 	{	
-		print_r($this->config);
-	
 		$this->setFetchMode(PDO::FETCH_NUM);
 		
 		return $this->select($query, $bindings = array(), $useReadPdo = true);

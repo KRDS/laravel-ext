@@ -15,6 +15,7 @@ class ConnectionFactory extends \Illuminate\Database\Connectors\ConnectionFactor
 			return $this->container->make($key, array($connection, $database, $prefix, $config));
 		}
 		
+		// Add to the Connection config the default app fetch mode
 		$config['fetch'] = $this->container['config']['database.fetch'];
 
 		switch ($driver)
