@@ -1,6 +1,7 @@
 <?php namespace KRDS\Extensions\Database;
 
 use KRDS\Extensions\Database\Connectors\ConnectionFactory;
+use Illuminate\Foundation\Application as App;
 
 class DatabaseServiceProvider extends \Illuminate\Database\DatabaseServiceProvider {
 
