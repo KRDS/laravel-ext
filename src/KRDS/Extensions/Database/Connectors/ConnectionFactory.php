@@ -14,6 +14,8 @@ class ConnectionFactory extends \Illuminate\Database\Connectors\ConnectionFactor
 		{
 			return $this->container->make($key, array($connection, $database, $prefix, $config));
 		}
+		
+		$config['fetch'] = $this->container['config']['database.fetch'];
 
 		switch ($driver)
 		{
