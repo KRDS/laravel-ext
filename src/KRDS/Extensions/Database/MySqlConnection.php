@@ -19,7 +19,10 @@ class MySqlConnection extends \Illuminate\Database\Connection {
 
 			$statement->execute($me->prepareBindings($bindings));
 
-			return $statement->fetchAll($me->getFetchMode(), $fetchArgument);
+			if($me->getFetchMode() === PDO::FETCH_COLUMN)
+				return $statement->fetchAll($me->getFetchMode(), $fetchArgument);
+			else
+				return $statement->fetchAll($me->getFetchMode());
 		});
 	}
 	
