@@ -2,7 +2,7 @@
 
 use PDO;
 
-class MySqlConnection extends Connection {
+class MySqlConnection extends \Illuminate\Database\Connection {
 
 	protected function fetch_assoc()
 	{

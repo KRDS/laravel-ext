@@ -6,7 +6,7 @@ use Illuminate\Database\SQLiteConnection;
 use Illuminate\Database\PostgresConnection;
 use Illuminate\Database\SqlServerConnection;
 
-class ConnectionFactory extends Illuminate\Database\Connectors\ConnectionFactory {
+class ConnectionFactory extends \Illuminate\Database\Connectors\ConnectionFactory {
 
 	protected function createConnection($driver, PDO $connection, $database, $prefix = '', array $config = array())
 	{

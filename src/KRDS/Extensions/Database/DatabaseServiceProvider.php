@@ -2,7 +2,7 @@
 
 use KRDS\Extensions\Database\Connectors\ConnectionFactory;
 
-class DatabaseServiceProvider extends Illuminate\Database\DatabaseServiceProvider {
+class DatabaseServiceProvider extends \Illuminate\Database\DatabaseServiceProvider {
 
     public function boot()
     {
